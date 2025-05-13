@@ -33,9 +33,10 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding User}" FontSize="10" Margin="0,0,0,5" Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Text="{Binding User}" FontSize="10" Margin="0,0,0,1" Grid.Column="0" Grid.Row="0"/>
                 <TextBlock Text="{Binding Content}" TextWrapping="Wrap" MaxWidth="200" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" FontSize="14" HorizontalAlignment="left" VerticalAlignment="center"/>
                 <TextBlock Text="{Binding TimeStamp}" FontSize="9" Grid.Column="2" Grid.Row="2"/>
+                <Button Grid.Column="2" Grid.Row="0"/>
             </Grid>
         </Border>
     </Grid>

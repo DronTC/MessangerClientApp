@@ -1,10 +1,13 @@
 ﻿using MessangerClientApp.Core.Interfaces;
 using MessangerClientApp.Core.Services;
+using MessangerClientApp.Infrastructure;
+using MessangerClientApp.Infrastructure.Api;
+using MessangerClientApp.Infrastructure.Api.Clients;
+using MessangerClientApp.Infrastructure.Repositories;
 using MessangerClientApp.View.Pages;
 using MessangerClientApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
-using System.Data;
+using System.Net.Http.Headers;
 using System.Windows;
 
 namespace MessangerClientApp
@@ -26,7 +29,7 @@ namespace MessangerClientApp
             mainWindow.Show();
 
             var navigationService = _serviceProvider.GetRequiredService<INavigationService>();
-            navigationService.NavigateTo("AuthPage", "MainFrame");
+            navigationService.NavigateTo("AuthPage", "FullScreenFrame");
         }
         private void ConfigureServices()
         {
@@ -36,6 +39,15 @@ namespace MessangerClientApp
 
             services.AddSingleton<IServiceProvider>(provider => provider);
             services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddHttpClient<IUserApiClient, UserApiClient>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5233");
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+            services.AddTransient<UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<AuthViewModel>();
             services.AddTransient<RegViewModel>();

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace MessangerClientApp.Core.Interfaces
+﻿namespace MessangerClientApp.Core.Interfaces
 {
     public interface IAuthService
     {

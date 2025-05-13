@@ -47,6 +47,10 @@
                    Grid.Column="1" 
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="FullScreenFrame"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>
 </Window>

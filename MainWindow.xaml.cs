@@ -5,9 +5,6 @@ using System.Windows.Input;
 
 namespace MessangerClientApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow(INavigationService navigationService)
@@ -16,6 +13,7 @@ namespace MessangerClientApp
 
             navigationService.RegisterFrame("MainFrame", MainFrame);
             navigationService.RegisterFrame("ChatFrame", ChatFrame);
+            navigationService.RegisterFrame("FullScreenFrame", FullScreenFrame);
 
             navigationService.Configure("AuthPage", typeof(AuthPage));
             navigationService.Configure("RegPage", typeof(RegPage));

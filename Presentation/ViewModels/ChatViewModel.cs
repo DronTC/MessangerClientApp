@@ -20,8 +20,8 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        private ChatModel _chat;
-        public ChatModel Chat
+        private Chat _chat;
+        public Chat Chat
         {
             get => _chat;
             set
@@ -33,7 +33,7 @@ namespace MessangerClientApp.ViewModels
         public ICommand SendMessageCommand{ get; private set; }
         private void ExecuteSendMessageCommand(object parameter)
         {
-            var newMessage = new MessageModel("USER", _textBoxValue);
+            var newMessage = new Message("USER", _textBoxValue);
             Chat.AddMessage(newMessage);
         }
         private bool CanSendMessageCommand(object parameter)
@@ -42,7 +42,7 @@ namespace MessangerClientApp.ViewModels
         }
         public ChatViewModel()
         {
-            Chat = new ChatModel();
+            Chat = new Chat();
             SendMessageCommand = new RelayCommand(ExecuteSendMessageCommand, CanSendMessageCommand);
         }
     }

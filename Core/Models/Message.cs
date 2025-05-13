@@ -1,11 +1,11 @@
 ﻿namespace MessangerClientApp.Models
 {
-    public class MessageModel
+    public class Message
     {
         public string User { get; set; }
         public string Content { get; set; }
         public string TimeStamp { get; set; }
-        public MessageModel(string user, string content)
+        public Message(string user, string content)
         {
             User = user;
             Content = content;

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MessangerClientApp.Core.Interfaces;
 using System.Windows.Controls;
-using MessangerClientApp.Core.Interfaces;
 
 namespace MessangerClientApp.Core.Services
 {
@@ -62,6 +56,10 @@ namespace MessangerClientApp.Core.Services
                 throw new InvalidOperationException($"Не удалось создать страницу {pageType.Name}. Убедитесь, что она зарегистрирована в DI.");
 
             frame.Navigate(page);
+        }
+        public void ClearFrame(string frameKey)
+        {
+            _frames[frameKey].Navigate(null);
         }
     }
 }

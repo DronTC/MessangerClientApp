@@ -13,22 +13,29 @@
             <RowDefinition Height="0.9*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <ListView Name="ChatListView" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+        <ItemsControl Name="ChatListView" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                   Grid.Row="0" Background="#0f1821" ItemsSource="{Binding Chat.Messages}">
-            <ListView.ItemTemplate>
+            <ItemsControl.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="IsSelected" Value="False"/>
+                </Style>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <uc:MessageUserControl DataContext="{Binding}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <Grid Grid.Row="1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.9*"/>
                 <ColumnDefinition Width="0.1*"/>
             </Grid.ColumnDefinitions>
             <!--https://www.flaticon.com/ru/icon-fonts-most-downloaded-->
-            <TextBox Grid.Column="0" Text="{Binding TextBoxValue, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalContentAlignment="Center"
-                     Background="Transparent" Foreground="White"/>
+            <TextBox Grid.Column="0"
+                     Text="{Binding TextBoxValue, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalContentAlignment="Center"
+                     Background="Transparent" Foreground="White">
+            </TextBox>
             <Button Grid.Column="1" Margin="5" Command="{Binding SendMessageCommand}"/>
         </Grid>
     </Grid>

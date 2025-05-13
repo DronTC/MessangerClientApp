@@ -7,5 +7,6 @@ namespace MessangerClientApp.Core.Interfaces
         void RegisterFrame(string frameKey, Frame frame);
         void Configure(string pageKey, Type pageType);
         void NavigateTo(string pageKey, string frameName);
+        void ClearFrame(string framekey);
     }
 }

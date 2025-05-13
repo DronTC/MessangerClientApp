@@ -67,7 +67,7 @@
         <Label Grid.Row="4" Content="Подтвердите пароль" 
                VerticalAlignment="Top"
                Width="125" Height="24"/>
-        <Button Command="{Binding RegistrationCommand}"
+        <Button Command="{Binding RegCommand}"
                 Grid.Row="5" Content="Регистрация" Margin="0, 5, 0, 0"
                 MinWidth="50"
                 MaxWidth="250"
