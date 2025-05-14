@@ -6,8 +6,38 @@ namespace MessangerClientApp.ViewModels
 {
     public class ChatViewModel: BaseViewModel
     {
+        private string _chatNameValue;
         private string _textBoxValue;
+        private Chat _chat;
+        public ChatViewModel()
+        {
+            Chat = new Chat();
+            ChatNameValue = "Chat name";
+            SendMessageCommand = new RelayCommand(ExecuteSendMessageCommand, CanSendMessageCommand);
+        }
+        public ICommand SendMessageCommand{ get; private set; }
+        private void ExecuteSendMessageCommand(object parameter)
+        {
+            var newMessage = new Message("USER", _textBoxValue);
+            Chat.AddMessage(newMessage);
+        }
+        private bool CanSendMessageCommand(object parameter)
+        {
+            return !string.IsNullOrWhiteSpace(_textBoxValue);
+        }
 
+        public string ChatNameValue
+        {
+            get => _chatNameValue;
+            set
+            {
+                if (_chatNameValue != value)
+                {
+                    _chatNameValue = value;
+                    OnPropertyChanged(nameof(ChatNameValue));
+                }
+            }
+        }
         public string TextBoxValue
         {
             get => _textBoxValue;
@@ -20,7 +50,6 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        private Chat _chat;
         public Chat Chat
         {
             get => _chat;
@@ -29,21 +58,6 @@ namespace MessangerClientApp.ViewModels
                 _chat = value;
                 OnPropertyChanged(nameof(Chat.Messages));
             }
-        }
-        public ICommand SendMessageCommand{ get; private set; }
-        private void ExecuteSendMessageCommand(object parameter)
-        {
-            var newMessage = new Message("USER", _textBoxValue);
-            Chat.AddMessage(newMessage);
-        }
-        private bool CanSendMessageCommand(object parameter)
-        {
-            return !string.IsNullOrWhiteSpace(_textBoxValue);
-        }
-        public ChatViewModel()
-        {
-            Chat = new Chat();
-            SendMessageCommand = new RelayCommand(ExecuteSendMessageCommand, CanSendMessageCommand);
         }
     }
 }

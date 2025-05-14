@@ -4,6 +4,8 @@ using MessangerClientApp.Infrastructure;
 using MessangerClientApp.Infrastructure.Api;
 using MessangerClientApp.Infrastructure.Api.Clients;
 using MessangerClientApp.Infrastructure.Repositories;
+using MessangerClientApp.Presentation.View.Pages;
+using MessangerClientApp.Presentation.ViewModels;
 using MessangerClientApp.View.Pages;
 using MessangerClientApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,10 +54,12 @@ namespace MessangerClientApp
             services.AddTransient<AuthViewModel>();
             services.AddTransient<RegViewModel>();
             services.AddTransient<ChatViewModel>();
+            services.AddTransient<ChatListViewModel>();
 
             services.AddTransient<AuthPage>();
             services.AddTransient<RegPage>();
             services.AddTransient<ChatPage>();
+            services.AddTransient<ChatListPage>();
 
             _serviceProvider = services.BuildServiceProvider();
         }

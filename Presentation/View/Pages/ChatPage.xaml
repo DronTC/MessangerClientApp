@@ -10,11 +10,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.85*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="{Binding ChatNameValue}" Margin="5,0,0,0" Foreground="White"
+                       HorizontalAlignment="Left" FontSize="15"/>
+        </Grid>
         <ItemsControl Name="ChatListView" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                  Grid.Row="0" Background="#0f1821" ItemsSource="{Binding Chat.Messages}">
+                  Grid.Row="1" Background="#0f1821" ItemsSource="{Binding Chat.Messages}">
             <ItemsControl.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="IsSelected" Value="False"/>
@@ -26,7 +31,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Grid Grid.Row="1" Margin="5">
+        <Grid Grid.Row="2" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.9*"/>
                 <ColumnDefinition Width="0.1*"/>

@@ -1,4 +1,5 @@
 ﻿using MessangerClientApp.Core.Interfaces;
+using MessangerClientApp.Presentation.View.Pages;
 using MessangerClientApp.View.Pages;
 using System.Windows;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace MessangerClientApp
             navigationService.Configure("AuthPage", typeof(AuthPage));
             navigationService.Configure("RegPage", typeof(RegPage));
             navigationService.Configure("ChatPage", typeof(ChatPage));
+            navigationService.Configure("ChatListPage", typeof(ChatListPage));
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

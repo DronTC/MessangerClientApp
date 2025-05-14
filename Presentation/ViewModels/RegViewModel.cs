@@ -29,6 +29,7 @@ namespace MessangerClientApp.ViewModels
             User = new User();
             _apiClient = apiClient;
             _logger = logger;
+            _navService = navService;
 
             RegCommand = new RelayCommand(ExecuteRegCommandAsync);
             SwitchPageCommand = new RelayCommand(ExecuteSwitchPageCommand);
@@ -38,63 +39,35 @@ namespace MessangerClientApp.ViewModels
         public ICommand SwitchPageCommand { get; private set; }
         private async void ExecuteRegCommandAsync(object parameter)
         {
-            _navService.NavigateTo("ChatPage", "ChatFrame");
-            _navService.ClearFrame("FullScreenFrame");
-            //if (!string.IsNullOrWhiteSpace(LoginValue) && !string.IsNullOrWhiteSpace(PasswordValue))
-            //{
-                //try
-                //{
-                //    ErrorMessage = string.Empty;
-
-                //    var createUserDto = new CreateUserDTO
-                //    {
-                //        Login = LoginValue,
-                //        Password = PasswordValue,
-                //        Email = EmailValue
-                //    };
-
-                //    var registeredUser = await _apiClient.RegisterAsync(createUserDto);
-
-                //    // Успешная регистрация
-                //    _logger.LogInformation($"User {registeredUser.Login} registered");
-
-                //    // Автоматический вход после регистрации
-                //    await LoginAsync();
-                //}
-                //catch (Exception ex)
-                //{
-                //    ErrorMessage = ex.Message;
-                //    _logger.LogError(ex, "Registration error");
-                //}
-            //}
-            //else
-            //    MessageBox.Show("Необходимо заполнить все поля");
-        }
-
-        private async Task LoginAsync()
-        {
-            try
+            if (!string.IsNullOrWhiteSpace(LoginValue) && !string.IsNullOrWhiteSpace(PasswordValue))
             {
-                ErrorMessage = string.Empty;
-
-                var loginDto = new LoginUserDTO
+                try
                 {
-                    Login = LoginValue,
-                    Password = PasswordValue
-                };
+                    ErrorMessage = string.Empty;
 
-                var authResponse = await _apiClient.LoginAsync(loginDto);
+                    var createUserDto = new CreateUserDTO
+                    {
+                        Login = LoginValue,
+                        Email = EmailValue,
+                        Password = PasswordValue,
+                    };
 
-                // Успешная авторизация
-                _logger.LogInformation($"User {LoginValue} logged in");
+                    var registeredUser = await _apiClient.RegisterAsync(createUserDto);
 
-                // Здесь можно перейти на главный экран приложения
+                    _logger.LogInformation($"User {registeredUser.Login} registered");
+
+                    _navService.NavigateTo("ChatPage", "ChatFrame");
+                    _navService.NavigateTo("ChatListPage", "MainFrame");
+                    _navService.ClearFrame("FullScreenFrame");
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage = ex.Message;
+                    _logger.LogError(ex, "Registration error");
+                }
             }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-                _logger.LogError(ex, "Login error");
-            }
+            else
+                MessageBox.Show("Необходимо заполнить все поля");
         }
 
         private void ExecuteSwitchPageCommand(object parameter)
