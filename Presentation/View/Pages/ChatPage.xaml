@@ -1,9 +1,9 @@
-﻿<Page x:Class="MessangerClientApp.View.Pages.ChatPage"
+﻿<Page x:Class="MessangerClientApp.Presentation.View.Pages.ChatPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:uc="clr-namespace:MessangerClientApp.Resources.UserControls"
+      xmlns:uc="clr-namespace:MessangerClientApp.Presentation.UserControls" xmlns:viewmodels="clr-namespace:MessangerClientApp.Presentation.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ChatViewModel}"
       mc:Ignorable="d" 
       Background="#1d2e3e"
       d:DesignHeight="800" d:DesignWidth="450">
@@ -27,7 +27,7 @@
             </ItemsControl.Resources>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <uc:MessageUserControl DataContext="{Binding}"/>
+                    <uc:MessageItemControl DataContext="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

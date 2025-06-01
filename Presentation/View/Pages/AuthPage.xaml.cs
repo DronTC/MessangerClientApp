@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using MessangerClientApp.ViewModels;
+using MessangerClientApp.Presentation.ViewModels;
 
 namespace MessangerClientApp.View.Pages
 {

@@ -16,7 +16,7 @@
 
             <Ellipse Width="40" Height="40" Margin="8">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="/Assets/chat_icon.png"/>
+                    <ImageBrush />
                 </Ellipse.Fill>
             </Ellipse>
 

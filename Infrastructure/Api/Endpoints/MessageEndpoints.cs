@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MessangerClientApp.Infrastructure.Api.Endpoints
+﻿namespace MessangerClientApp.Infrastructure.Api.Endpoints
 {
     public static class MessageEndpoints
     {

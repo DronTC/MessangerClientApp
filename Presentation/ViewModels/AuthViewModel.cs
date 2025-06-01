@@ -1,66 +1,57 @@
-﻿using MessangerClientApp.Core.Interfaces;
-using MessangerClientApp.Core.Commands;
-using MessangerClientApp.Models;
+﻿using MessangerClientApp.Core.Commands;
 using System.Windows;
 using System.Windows.Input;
-using MessangerClientApp.Infrastructure.Repositories;
 using MessangerClientApp.Infrastructure.Api.DTOs;
 using MessangerClientApp.Infrastructure.Api.Clients;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using MessangerClientApp.Infrastructure.Services;
 
-namespace MessangerClientApp.ViewModels
+namespace MessangerClientApp.Presentation.ViewModels
 {
     public class AuthViewModel: BaseViewModel
     {
-        private string _loginValue;
-        private string _passwordValue;
-        private User _user;
-        private string _errorMessage;
-        private ILogger _logger;
-        private IUserApiClient _apiClient;
+        private string? _loginValue;
+        private string? _passwordValue;
+        private readonly IUserApiClient _apiClient;
         private readonly INavigationService _navService;
-        public AuthViewModel(INavigationService navService, IUserApiClient apiClient,
-        ILogger<AuthViewModel> logger)
+        public ICommand AuthorizationCommand { get; private set; }
+        public ICommand SwitchPageCommand { get; private set; }
+        public AuthViewModel(INavigationService navService, IUserApiClient apiClient)
         {
-            User = new User();
             _navService = navService;
             _apiClient = apiClient;
-            _logger = logger;
 
             AuthorizationCommand = new RelayCommand(ExecuteAuthAsyncCommand);
             SwitchPageCommand = new RelayCommand(ExecuteSwitchPageCommand);
         }
-        public ICommand AuthorizationCommand { get; private set; }
-        public ICommand SwitchPageCommand { get; private set; }
         private async void ExecuteAuthAsyncCommand(object parameter)
         {
-            _navService.NavigateTo("ChatPage", "ChatFrame");
-            _navService.NavigateTo("ChatListPage", "MainFrame");
+            //_navService.NavigateTo("ChatPage", "ChatFrame");
+            //_navService.NavigateTo("ChatListPage", "MainFrame");
             _navService.ClearFrame("FullScreenFrame");
             //var password = PasswordValue;
             //if (!string.IsNullOrWhiteSpace(LoginValue) && !string.IsNullOrWhiteSpace(PasswordValue))
             //{
             //    try
             //    {
-            //        ErrorMessage = string.Empty;
-
-            //        var loginDto = new LoginUserDTO
+            //        var loginDTO = new LoginUserDTO
             //        {
             //            Login = LoginValue,
             //            Password = PasswordValue
             //        };
 
-            //        var authResponse = await _apiClient.LoginAsync(loginDto);
+            //        var authResponse = await _apiClient.LoginAsync(loginDTO);
 
-            //        _logger.LogInformation($"User {LoginValue} logged in");
+            //        Log.Information($"User {LoginValue} logged in");
 
             //        _navService.NavigateTo("ChatPage", "ChatFrame");
+            //        _navService.NavigateTo("ChatListPage", "MainFrame");
             //        _navService.ClearFrame("FullScreenFrame");
             //    }
             //    catch (Exception ex)
             //    {
-            //        ErrorMessage = ex.Message;
-            //        _logger.LogError(ex, "Login error");
+            //        Log.Error(ex, "Login error");
+            //        MessageBox.Show("Отсутствует доступ к серверу");
             //    }
             //}
             //else
@@ -71,7 +62,7 @@ namespace MessangerClientApp.ViewModels
             _navService.NavigateTo("RegPage", "FullScreenFrame");
         }
 
-        public string LoginValue
+        public string? LoginValue
         {
             get => _loginValue;
             set
@@ -83,7 +74,7 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        public string PasswordValue
+        public string? PasswordValue
         {
             get => _passwordValue;
             set
@@ -94,20 +85,6 @@ namespace MessangerClientApp.ViewModels
                     OnPropertyChanged(nameof(PasswordValue));
                 }
             }
-        }
-        public User User
-        {
-            get => _user;
-            set
-            {
-                _user = value;
-                OnPropertyChanged(nameof(User));
-            }
-        }
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
         }
     }
 }

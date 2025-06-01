@@ -1,9 +1,7 @@
-﻿using MessangerClientApp.ViewModels;
-using System.Windows;
+﻿using MessangerClientApp.Presentation.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Input;
 
-namespace MessangerClientApp.View.Pages
+namespace MessangerClientApp.Presentation.View.Pages
 {
     /// <summary>
     /// Логика взаимодействия для ChatPage.xaml

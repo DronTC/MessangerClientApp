@@ -2,9 +2,9 @@
 
 namespace MessangerClientApp.Presentation.UserControls
 {
-    public partial class ChatItemControl : UserControl
+    public partial class MessageItemControl : UserControl
     {
-        public ChatItemControl()
+        public MessageItemControl()
         {
             InitializeComponent();
         }

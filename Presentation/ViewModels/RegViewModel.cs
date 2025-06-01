@@ -1,69 +1,59 @@
-﻿using MessangerClientApp.Core.Interfaces;
-using MessangerClientApp.Core.Commands;
-using MessangerClientApp.Models;
+﻿using MessangerClientApp.Core.Commands;
 using System.Windows;
 using System.Windows.Input;
-using MessangerClientApp.Infrastructure.Repositories;
 using MessangerClientApp.Infrastructure.Api.DTOs;
-using MessangerClientApp.Infrastructure;
 using MessangerClientApp.Infrastructure.Api.Clients;
-using Microsoft.Extensions.Logging;
-namespace MessangerClientApp.ViewModels
+using Serilog;
+using MessangerClientApp.Infrastructure.Services;
+
+namespace MessangerClientApp.Presentation.ViewModels
 {
     public class RegViewModel: BaseViewModel
     {
-        private string _loginValue;
-        private string _emailValue;
-        private string _passwordValue;
-        private string _confPasswordValue;
-        private string _errorMessage;
-        private User _user;
-        private INavigationService _navService;
-
+        private string? _loginValue;
+        private string? _emailValue;
+        private string? _passwordValue;
+        private string? _confPasswordValue;
+        private readonly INavigationService _navService;
         private readonly IUserApiClient _apiClient;
-        private readonly ILogger<AuthViewModel> _logger;
-
-        public RegViewModel(INavigationService navService, IUserApiClient apiClient,
-        ILogger<AuthViewModel> logger)
+        public ICommand RegCommand { get; private set; }
+        public ICommand SwitchPageCommand { get; private set; }
+        public RegViewModel(INavigationService navService, IUserApiClient apiClient)
         {
-            User = new User();
             _apiClient = apiClient;
-            _logger = logger;
             _navService = navService;
 
             RegCommand = new RelayCommand(ExecuteRegCommandAsync);
             SwitchPageCommand = new RelayCommand(ExecuteSwitchPageCommand);
         }
-
-        public ICommand RegCommand { get; private set; }
-        public ICommand SwitchPageCommand { get; private set; }
         private async void ExecuteRegCommandAsync(object parameter)
         {
-            if (!string.IsNullOrWhiteSpace(LoginValue) && !string.IsNullOrWhiteSpace(PasswordValue))
+            if (!string.IsNullOrWhiteSpace(LoginValue) 
+                && !string.IsNullOrWhiteSpace(EmailValue) 
+                && !string.IsNullOrWhiteSpace(PasswordValue))
             {
                 try
                 {
-                    ErrorMessage = string.Empty;
-
-                    var createUserDto = new CreateUserDTO
+                    var createUserDTO = new CreateUserDTO
                     {
                         Login = LoginValue,
                         Email = EmailValue,
                         Password = PasswordValue,
                     };
 
-                    var registeredUser = await _apiClient.RegisterAsync(createUserDto);
+                    var registeredUser = await _apiClient.RegisterAsync(createUserDTO);
 
-                    _logger.LogInformation($"User {registeredUser.Login} registered");
+                    Log.Information($"User {registeredUser.Login} registered");
 
                     _navService.NavigateTo("ChatPage", "ChatFrame");
                     _navService.NavigateTo("ChatListPage", "MainFrame");
                     _navService.ClearFrame("FullScreenFrame");
+                    return;
                 }
                 catch (Exception ex)
                 {
-                    ErrorMessage = ex.Message;
-                    _logger.LogError(ex, "Registration error");
+                    Log.Error(ex, "Registration error");
+                    MessageBox.Show("Отсутствует доступ к серверу");
                 }
             }
             else
@@ -75,7 +65,7 @@ namespace MessangerClientApp.ViewModels
             _navService.NavigateTo("AuthPage", "FullScreenFrame");
         }
 
-        public string LoginValue
+        public string? LoginValue
         {
             get => _loginValue;
             set
@@ -87,7 +77,7 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        public string EmailValue
+        public string? EmailValue
         {
             get => _emailValue;
             set
@@ -99,7 +89,7 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        public string PasswordValue
+        public string? PasswordValue
         {
             get => _passwordValue;
             set
@@ -111,7 +101,7 @@ namespace MessangerClientApp.ViewModels
                 }
             }
         }
-        public string ConfPasswordValue
+        public string? ConfPasswordValue
         {
             get => _confPasswordValue;
             set
@@ -122,20 +112,6 @@ namespace MessangerClientApp.ViewModels
                     OnPropertyChanged(nameof(ConfPasswordValue));
                 }
             }
-        }
-        public User User
-        {
-            get => _user;
-            set
-            {
-                _user = value;
-                OnPropertyChanged(nameof(User));
-            }
-        }
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
         }
     }
 }

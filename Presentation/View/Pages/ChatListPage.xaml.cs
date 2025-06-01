@@ -1,5 +1,4 @@
 ﻿using MessangerClientApp.Presentation.ViewModels;
-using MessangerClientApp.ViewModels;
 using System.Windows.Controls;
 
 namespace MessangerClientApp.Presentation.View.Pages

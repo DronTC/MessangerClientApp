@@ -1,0 +1,132 @@
+﻿<Page x:Class="MessangerClientApp.Presentation.View.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MessangerClientApp.Presentation.View.Pages"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+    <Page.Resources>
+        <Storyboard x:Key="NewsLoadAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                            From="0" To="1" Duration="0:0:0.5"/>
+        </Storyboard>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="15" Margin="40,30,0,0" Background="#3D3D3D"
+                VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Border.Clip>
+                <RectangleGeometry Rect="0,0,800,450" 
+                       RadiusX="15" RadiusY="15"/>
+            </Border.Clip>
+            <Grid Width="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.ColumnSpan="2">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Resources/Images/Profile_Background.jpg"/>
+                    </Border.Background>
+                </Border>
+                <Button Grid.Column="1" Width="20" Height="20" Margin="0,5,5,0"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Content="{material:PackIcon Kind=Bell, Size=20}" 
+                        Background="Transparent"
+                        Style="{StaticResource SystemButton}"/>
+                <Ellipse Width="100" Height="100" Margin="5" Grid.RowSpan="2"
+                         VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Resources/Images/Avatar_Placeholder.jpg"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <StackPanel Grid.RowSpan="2" Grid.Column="1" Margin="5,0,10,10"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="DronTS" Foreground="White" 
+                               FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="eldouser070317@gmail.com" 
+                               Foreground="White" FontSize="10"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.RowSpan="2" Margin="20,0,20,20" CornerRadius="10" Grid.Column="1"
+                Background="White" BorderBrush="#FFE0E0E0" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок новостей -->
+                <Border Grid.Row="0" Background="#FF2196F3" CornerRadius="10,10,0,0"
+                        Padding="15,10">
+                    <TextBlock Text="Последние новости" Foreground="White" 
+                              FontSize="16" FontWeight="Bold"/>
+                </Border>
+
+                <!-- Контент новостей с прокруткой -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
+                    <StackPanel>
+                        <!-- Новость 1 -->
+                        <Border Margin="0,0,0,10" CornerRadius="5" 
+                                BorderBrush="#EEEEEE" BorderThickness="1"
+                                Background="#FFF9F9F9">
+                            <StackPanel>
+                                <TextBlock Text="Обновление системы" Margin="10,10,10,5"
+                                          FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Добавлены новые функции профиля" 
+                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
+                                <TextBlock Text="2 часа назад" Margin="10,0,10,10"
+                                          Foreground="#777777" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Новость 2 -->
+                        <Border Margin="0,0,0,10" CornerRadius="5" 
+                                BorderBrush="#EEEEEE" BorderThickness="1"
+                                Background="#FFF9F9F9">
+                            <StackPanel>
+                                <TextBlock Text="Технические работы" Margin="10,10,10,5"
+                                          FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Запланированы работы на 15.05 с 03:00 до 05:00" 
+                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
+                                <TextBlock Text="Вчера" Margin="10,0,10,10"
+                                          Foreground="#777777" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Новость 3 (с изображением) -->
+                        <Border Margin="0,0,0,10" CornerRadius="5" 
+                                BorderBrush="#EEEEEE" BorderThickness="1"
+                                Background="#FFF9F9F9">
+                            <StackPanel>
+                                <Image Source="https://via.placeholder.com/400x150" 
+                                       Stretch="UniformToFill" Height="100"/>
+                                <TextBlock Text="Новый дизайн" Margin="10,10,10,5"
+                                          FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Мы обновили интерфейс приложения" 
+                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
+                                <TextBlock Text="3 дня назад" Margin="10,0,10,10"
+                                          Foreground="#777777" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:MessangerClientApp.Presentation.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
@@ -10,24 +11,44 @@
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseDown"
         WindowStyle="None">
-    <Window.Resources>
-    </Window.Resources>
-    <Border CornerRadius="25" Background="#242582">
+    <Border CornerRadius="25" Background="#121212">
         <Border.Clip>
             <RectangleGeometry Rect="0,0,800,450" 
                                RadiusX="15" RadiusY="15"/>
         </Border.Clip>
+
         <Grid ClipToBounds="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.ColumnSpan="2"
-                        Background="#2F2FA2"
+            <StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Horizontal">
+                <ListBox Width="{Binding NavigationBarWidth}" BorderThickness="0" 
+                         Style="{StaticResource NavigationListBox}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemsSource="{Binding MenuItems}"
+                         Background="#1E1E1E">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource NavigationItemButton}"
+                                Content="{Binding Title}"
+                                Foreground="White"
+                                Tag="{Binding Icon}"
+                                CommandParameter="{Binding}"
+                                Command="{Binding NavigateCommand}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Command="{Binding ResizeCommand}"
+                    Style="{StaticResource NavigationButton }"/>
+            </StackPanel>
+            <StackPanel Grid.ColumnSpan="3"
+                        Background="#171717"
                         Orientation="Horizontal"
                         FlowDirection="RightToLeft">
                 <Button Content="X" 
@@ -39,17 +60,15 @@
                 <Button Style="{StaticResource SystemButton}"
                         Click="MaximizedButton_Click"/>
             </StackPanel>
+
             <Frame x:Name="MainFrame"
-                   Grid.Column="0" 
-                   Grid.Row="1"
-                   NavigationUIVisibility="Hidden"/>
-            <Frame x:Name="ChatFrame"
                    Grid.Column="1" 
+                   Grid.ColumnSpan="2"
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden"/>
             <Frame x:Name="FullScreenFrame"
                    Grid.Row="1"
-                   Grid.ColumnSpan="2"
+                   Grid.ColumnSpan="3"
                    NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>

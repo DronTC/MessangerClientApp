@@ -6,7 +6,8 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="225"
-      Title="AuthPage">
+      Title="AuthPage"
+      Background="#121212">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.0*"/>

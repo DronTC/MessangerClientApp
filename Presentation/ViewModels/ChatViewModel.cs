@@ -2,7 +2,7 @@
 using MessangerClientApp.Core.Commands;
 using System.Windows.Input;
 
-namespace MessangerClientApp.ViewModels
+namespace MessangerClientApp.Presentation.ViewModels
 {
     public class ChatViewModel: BaseViewModel
     {

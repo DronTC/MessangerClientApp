@@ -1,4 +1,4 @@
-﻿using MessangerClientApp.Core.Interfaces;
+﻿using MessangerClientApp.Infrastructure.Services;
 using System.Windows.Controls;
 
 namespace MessangerClientApp.Core.Services

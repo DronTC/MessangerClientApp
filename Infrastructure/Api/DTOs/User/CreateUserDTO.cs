@@ -5,17 +5,14 @@ namespace MessangerClientApp.Infrastructure.Api.DTOs
 {
     public class CreateUserDTO
     {
-        [Required]
-        [StringLength(50)]
-        public string Login { get; set; }
+        [MaxLength(50)]
+        public required string Login { get; set; }
 
-        [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        [Required]
         [MinLength(8)]
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
     }
 }

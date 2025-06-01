@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MessangerClientApp.Core.Interfaces
+namespace MessangerClientApp.Infrastructure.Services
 {
     public interface INavigationService
     {

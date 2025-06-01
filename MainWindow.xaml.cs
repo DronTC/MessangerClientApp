@@ -1,32 +1,29 @@
-﻿using MessangerClientApp.Core.Interfaces;
+﻿using MessangerClientApp.Infrastructure.Services;
 using MessangerClientApp.Presentation.View.Pages;
+using MessangerClientApp.Presentation.ViewModels;
 using MessangerClientApp.View.Pages;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace MessangerClientApp
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(INavigationService navigationService)
+        public MainWindow(INavigationService navigationService, MainViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
 
             navigationService.RegisterFrame("MainFrame", MainFrame);
-            navigationService.RegisterFrame("ChatFrame", ChatFrame);
             navigationService.RegisterFrame("FullScreenFrame", FullScreenFrame);
-
-            navigationService.Configure("AuthPage", typeof(AuthPage));
-            navigationService.Configure("RegPage", typeof(RegPage));
-            navigationService.Configure("ChatPage", typeof(ChatPage));
-            navigationService.Configure("ChatListPage", typeof(ChatListPage));
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
         }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -39,7 +36,7 @@ namespace MessangerClientApp
 
         private void MaximizedButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            WindowState = WindowState.Maximized;
         }
     }
 }

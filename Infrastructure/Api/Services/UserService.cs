@@ -1,24 +1,14 @@
 ﻿using MessangerClientApp.Infrastructure.Api.Clients;
 using MessangerClientApp.Infrastructure.Api.DTOs;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Serilog;
 
 namespace MessangerClientApp.Infrastructure.Api
 {
     class UserService
     {
         private readonly IUserApiClient _apiClient;
-        private readonly ILogger<UserService> _logger;
 
-        public UserService(IUserApiClient apiClient, ILogger<UserService> logger)
-        {
-            _apiClient = apiClient;
-            _logger = logger;
-        }
+        public UserService(IUserApiClient apiClient) => _apiClient = apiClient;
 
         public async Task<UserDTO> GetUserAsync(int id)
         {
@@ -28,7 +18,7 @@ namespace MessangerClientApp.Infrastructure.Api
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to get user");
+                Log.Error(ex, "Failed to get user");
                 throw;
             }
         }
@@ -36,7 +26,6 @@ namespace MessangerClientApp.Infrastructure.Api
         {
             try
             {
-                // Дополнительная валидация перед отправкой
                 if (string.IsNullOrWhiteSpace(createUserDto.Login))
                     throw new ArgumentException("Login is required");
 
@@ -44,7 +33,7 @@ namespace MessangerClientApp.Infrastructure.Api
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to register user");
+                Log.Error(ex, "Failed to register user");
                 throw;
             }
         }

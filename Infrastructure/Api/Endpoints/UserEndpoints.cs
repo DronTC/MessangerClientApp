@@ -1,6 +1,4 @@
-﻿using System.Web;
-
-namespace MessangerClientApp.Infrastructure.Api.Endpoints
+﻿namespace MessangerClientApp.Infrastructure.Api.Endpoints
 {
     class UserEndpoints
     {

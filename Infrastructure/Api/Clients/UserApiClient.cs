@@ -1,23 +1,21 @@
 ﻿using MessangerClientApp.Infrastructure.Api.DTOs;
-using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Net;
 using System.Text.Json;
 using System.Text;
 using MessangerClientApp.Infrastructure.Api.Endpoints;
+using Serilog;
 
 namespace MessangerClientApp.Infrastructure.Api.Clients
 {
     public class UserApiClient : IUserApiClient
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger<UserApiClient> _logger;
         private readonly JsonSerializerOptions _serializerOptions;
 
-        public UserApiClient(HttpClient httpClient, ILogger<UserApiClient> logger)
+        public UserApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _logger = logger;
             _serializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
@@ -42,7 +40,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting user by ID");
+                Log.Error(ex, "Error getting user by ID");
                 throw;
             }
         }
@@ -67,7 +65,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error registering user");
+                Log.Error(ex, "Error registering user");
                 throw;
             }
         }
@@ -92,7 +90,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error during login");
+                Log.Error(ex, "Error during login");
                 throw;
             }
         }
@@ -111,7 +109,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
                     throw new UnauthorizedAccessException(errorContent);
                 default:
                     var errorMessage = $"HTTP error: {response.StatusCode} - {errorContent}";
-                    _logger.LogError(errorMessage);
+                    Log.Error(errorMessage);
                     throw new HttpRequestException(errorMessage);
             }
         }

@@ -92,7 +92,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating message: {Id}", updateMessageDto.Id);
+                _logger.LogError(ex, $"Error updating message: {updateMessageDto.Id}");
                 throw;
             }
         }
@@ -113,7 +113,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting message: {Id}", id);
+                _logger.LogError(ex, $"Error deleting message: {id}");
                 throw;
             }
         }
@@ -136,7 +136,7 @@ namespace MessangerClientApp.Infrastructure.Api.Clients
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting messages for chat: {ChatId}", chatId);
+                _logger.LogError(ex, $"Error getting messages for chat: {chatId}");
                 throw;
             }
         }
