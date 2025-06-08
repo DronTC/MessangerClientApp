@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace MessangerClientApp.View.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для RegPage.xaml
-    /// </summary>
     public partial class RegPage : Page
     {
         public RegPage(RegViewModel viewModel)

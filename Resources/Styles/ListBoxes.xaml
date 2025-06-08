@@ -12,11 +12,9 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <ContentPresenter/>
-                                <!-- Просто отображаем содержимое без состояний -->
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-                    <!-- Отключаем визуальные эффекты при взаимодействии -->
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="Transparent"/>

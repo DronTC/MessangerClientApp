@@ -32,7 +32,6 @@ namespace MessangerClientApp
 
             navigationService.Configure("AuthPage", typeof(AuthPage));
             navigationService.Configure("RegPage", typeof(RegPage));
-            navigationService.Configure("ChatPage", typeof(ChatPage));
             navigationService.Configure("ChatListPage", typeof(ChatListPage));
             navigationService.Configure("HomePage", typeof(HomePage));
             navigationService.Configure("SettingsPage", typeof(SettingsPage));
@@ -68,14 +67,12 @@ namespace MessangerClientApp
             services.AddTransient<MainViewModel>();
             services.AddTransient<AuthViewModel>();
             services.AddTransient<RegViewModel>();
-            services.AddTransient<ChatViewModel>();
             services.AddTransient<ChatListViewModel>();
             services.AddTransient<HomeViewModel>();
             services.AddTransient<SettingsViewModel>();
 
             services.AddTransient<AuthPage>();
             services.AddTransient<RegPage>();
-            services.AddTransient<ChatPage>();
             services.AddTransient<ChatListPage>();
             services.AddTransient<HomePage>();
             services.AddTransient<SettingsPage>();

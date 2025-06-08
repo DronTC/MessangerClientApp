@@ -23,6 +23,12 @@ namespace MessangerClientApp.Core.Collections
             },
             new NavigationItem
             {
+                Title = "Чаты",
+                Icon = "",
+                PageKey="ChatListPage"
+            },
+            new NavigationItem
+            {
                 Title = "Настройки",
                 Icon = "",
                 PageKey="SettingsPage"

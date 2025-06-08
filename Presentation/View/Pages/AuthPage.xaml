@@ -43,12 +43,28 @@
         <Label Grid.Row="1" Content="Логин/E-mail" Margin="5, 1, 0, 0" 
                VerticalAlignment="Top"
                Width="85" Height="24"/>
-        <PasswordBox x:Name="passwordBox" PasswordChanged="PasswordBox_PasswordChanged"
+        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
                      Margin="0,5,0,5"
                      MinWidth="50"
                      MaxWidth="250"
                      Grid.Row="2" 
                      Style="{StaticResource AuthRegTextBox}"/>
+        <TextBox Text="{Binding PasswordValue, UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="{Binding PasswordVisibleValue}"
+                 Grid.Row="2"
+                 Margin="0,5,0,5"
+                 MinWidth="50"
+                 MaxWidth="250"
+                 VerticalAlignment="Center"
+                 Style="{StaticResource AuthRegTextBox}"/>
+        <Button Grid.Column="1" Style="{StaticResource TransparentEyeButton}"
+                Command="{Binding TogglePasswordCommand}"
+                Content="👁" 
+                Width="30"
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                Margin="190,0,0,0"
+                VerticalAlignment="Center"/>
         <Label Grid.Row="2" Content="Пароль" Margin="5, 1, 0, 0" 
                VerticalAlignment="Top"
                Width="51" Height="24"/>

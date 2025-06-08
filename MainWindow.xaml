@@ -19,7 +19,6 @@
 
         <Grid ClipToBounds="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
@@ -27,26 +26,6 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Horizontal">
-                <ListBox Width="{Binding NavigationBarWidth}" BorderThickness="0" 
-                         Style="{StaticResource NavigationListBox}"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ItemsSource="{Binding MenuItems}"
-                         Background="#1E1E1E">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource NavigationItemButton}"
-                                Content="{Binding Title}"
-                                Foreground="White"
-                                Tag="{Binding Icon}"
-                                CommandParameter="{Binding}"
-                                Command="{Binding NavigateCommand}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <Button Command="{Binding ResizeCommand}"
-                    Style="{StaticResource NavigationButton }"/>
-            </StackPanel>
             <StackPanel Grid.ColumnSpan="3"
                         Background="#171717"
                         Orientation="Horizontal"
@@ -62,13 +41,34 @@
             </StackPanel>
 
             <Frame x:Name="MainFrame"
-                   Grid.Column="1" 
+                   Grid.Column="0" 
                    Grid.ColumnSpan="2"
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden"/>
+            <StackPanel Grid.Column="0" Grid.Row="1"  
+                Orientation="Horizontal">
+                <ListBox Width="{Binding NavigationBarWidth}" BorderThickness="0" 
+     Style="{StaticResource NavigationListBox}"
+     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+     ItemsSource="{Binding MenuItems}"
+     Background="#1E1E1E">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource NavigationItemButton}"
+            Content="{Binding Title}"
+            Foreground="White"
+            Tag="{Binding Icon}"
+            CommandParameter="{Binding}"
+            Command="{Binding NavigateCommand}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Command="{Binding ResizeCommand}"
+Style="{StaticResource NavigationButton }"/>
+            </StackPanel>
             <Frame x:Name="FullScreenFrame"
                    Grid.Row="1"
-                   Grid.ColumnSpan="3"
+                   Grid.ColumnSpan="2"
                    NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>

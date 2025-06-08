@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MessangerClientApp.Presentation.View.Pages"
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:uc="clr-namespace:MessangerClientApp.Presentation.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
@@ -63,70 +64,32 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Border Grid.RowSpan="2" Margin="20,0,20,20" CornerRadius="10" Grid.Column="1"
-                Background="White" BorderBrush="#FFE0E0E0" BorderThickness="1">
+        <Border Grid.RowSpan="2" 
+                Margin="0,5,20,20" 
+                CornerRadius="10" Grid.Column="1"
+                BorderBrush="#FFE0E0E0" BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Заголовок новостей -->
-                <Border Grid.Row="0" Background="#FF2196F3" CornerRadius="10,10,0,0"
-                        Padding="15,10">
-                    <TextBlock Text="Последние новости" Foreground="White" 
-                              FontSize="16" FontWeight="Bold"/>
-                </Border>
-
-                <!-- Контент новостей с прокруткой -->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
-                    <StackPanel>
-                        <!-- Новость 1 -->
-                        <Border Margin="0,0,0,10" CornerRadius="5" 
-                                BorderBrush="#EEEEEE" BorderThickness="1"
-                                Background="#FFF9F9F9">
-                            <StackPanel>
-                                <TextBlock Text="Обновление системы" Margin="10,10,10,5"
-                                          FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="Добавлены новые функции профиля" 
-                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
-                                <TextBlock Text="2 часа назад" Margin="10,0,10,10"
-                                          Foreground="#777777" FontSize="12"/>
-                            </StackPanel>
-                        </Border>
-
-                        <!-- Новость 2 -->
-                        <Border Margin="0,0,0,10" CornerRadius="5" 
-                                BorderBrush="#EEEEEE" BorderThickness="1"
-                                Background="#FFF9F9F9">
-                            <StackPanel>
-                                <TextBlock Text="Технические работы" Margin="10,10,10,5"
-                                          FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="Запланированы работы на 15.05 с 03:00 до 05:00" 
-                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
-                                <TextBlock Text="Вчера" Margin="10,0,10,10"
-                                          Foreground="#777777" FontSize="12"/>
-                            </StackPanel>
-                        </Border>
-
-                        <!-- Новость 3 (с изображением) -->
-                        <Border Margin="0,0,0,10" CornerRadius="5" 
-                                BorderBrush="#EEEEEE" BorderThickness="1"
-                                Background="#FFF9F9F9">
-                            <StackPanel>
-                                <Image Source="https://via.placeholder.com/400x150" 
-                                       Stretch="UniformToFill" Height="100"/>
-                                <TextBlock Text="Новый дизайн" Margin="10,10,10,5"
-                                          FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="Мы обновили интерфейс приложения" 
-                                          Margin="10,0,10,10" TextWrapping="Wrap"/>
-                                <TextBlock Text="3 дня назад" Margin="10,0,10,10"
-                                          Foreground="#777777" FontSize="12"/>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
-                </ScrollViewer>
             </Grid>
         </Border>
+        <ScrollViewer Grid.RowSpan="2" Grid.Column="1"
+                      VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding NewsItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <uc:NewsItemControl DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>
