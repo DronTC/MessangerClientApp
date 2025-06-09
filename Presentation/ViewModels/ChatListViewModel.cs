@@ -12,13 +12,14 @@ namespace MessangerClientApp.Presentation.ViewModels
         public ChatListViewModel()
         {
             Chat = new Chat();
-            ChatNameValue = "Chat name";
+            ChatNameValue = "Group Chat";
             SendMessageCommand = new RelayCommand(ExecuteSendMessageCommand, CanSendMessageCommand);
         }
         public ICommand SendMessageCommand { get; private set; }
         private void ExecuteSendMessageCommand(object parameter)
         {
             var newMessage = new Message("USER", _textBoxValue);
+            TextBoxValue = string.Empty;
             Chat.AddMessage(newMessage);
         }
         private bool CanSendMessageCommand(object parameter)
@@ -59,5 +60,6 @@ namespace MessangerClientApp.Presentation.ViewModels
                 OnPropertyChanged(nameof(Chat.Messages));
             }
         }
+
     }
 }

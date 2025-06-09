@@ -46,6 +46,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <ContentPresenter Margin="2"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" 
+                                      RecognizesAccessKey="True"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Foreground" Value="#757575"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="AuthRegButton" TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Medium"/>

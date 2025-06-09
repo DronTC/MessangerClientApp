@@ -4,11 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:uc="clr-namespace:MessangerClientApp.Presentation.UserControls" 
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:MessangerClientApp.Presentation.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ChatsPage">
-
+      d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.4*"/>
@@ -23,9 +22,15 @@
 
             <TextBlock Text="Чаты" 
                        Foreground="White"
-                       FontSize="20"
-                       FontWeight="Bold"
+                       Grid.Row="0"
+                       FontSize="20" FontWeight="Bold"
                        Margin="16,8"/>
+
+            <Button Grid.Row="0"
+                    Content="{material:PackIcon Kind=PlusBox, Size=25}"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource IconButton}"/>
 
             <ItemsControl Grid.Row="1" 
                           ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -37,11 +42,11 @@
                 </ItemsControl.Resources>
             </ItemsControl>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="#2A2A2A">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="0.85*"/>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="auto" MinHeight="40" MaxHeight="100"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#2D2D2D">
                 <TextBlock Text="{Binding ChatNameValue}" FontSize="20"
@@ -49,31 +54,57 @@
                            Margin="16,8" Foreground="White"
                            HorizontalAlignment="Left"/>
             </Grid>
-            <ItemsControl Name="ChatListView" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                  Grid.Row="1" Background="#2A2A2A" ItemsSource="{Binding Chat.Messages}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Chat.Messages}">
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer x:Name="MessageScrollViewer"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      CanContentScroll="True">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                
                 <ItemsControl.Resources>
                     <Style TargetType="ListViewItem">
                         <Setter Property="IsSelected" Value="False"/>
                     </Style>
                 </ItemsControl.Resources>
+                
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <uc:MessageItemControl DataContext="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Grid Grid.Row="2" Margin="5"
-                  Background="#252525">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.9*"/>
-                    <ColumnDefinition Width="0.1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0"
-                     Text="{Binding TextBoxValue, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalContentAlignment="Center"
-                     Background="Transparent" Foreground="White">
-                </TextBox>
-                <Button Grid.Column="1" Margin="5" Command="{Binding SendMessageCommand}"/>
-            </Grid>
+            <Border Grid.Row="2" Background="#252525"
+                    Margin="10,0,10,10" CornerRadius="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0"
+                             Text="{Binding TextBoxValue, UpdateSourceTrigger=PropertyChanged}" 
+                             FontSize="14" 
+                             Background="Transparent" Foreground="White"
+                             CaretBrush="White"
+                             VerticalContentAlignment="Center"
+                             
+                             TextWrapping="Wrap"
+                             BorderThickness="0"
+                             Margin="3">
+                    </TextBox>
+                    <Button Grid.Column="1" Margin="5,0,10,0" 
+                            Style="{StaticResource IconButton}"
+                            Width="20" Height="20"
+                            HorizontalAlignment="Right"
+                            Content="{material:PackIcon Kind=SendOutline}"
+                            Command="{Binding SendMessageCommand}">
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Page>

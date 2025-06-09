@@ -26,7 +26,7 @@
                         Margin="8"
                         Background="#FFEEEEEE"
                         CornerRadius="2">
-                    <Image Source="{Binding IconSource}"
+                    <Image Source="{Binding ImageSource}"
                            Stretch="UniformToFill"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>

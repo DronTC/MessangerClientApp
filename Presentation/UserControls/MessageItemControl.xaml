@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:MessangerClientApp.Presentation.ViewModels"
              xmlns:local="clr-namespace:MessangerClientApp.Presentation.UserControls"
              mc:Ignorable="d" 
@@ -21,7 +22,10 @@
                 <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Avatar_Placeholder.jpg"/>
             </Ellipse.Fill>
         </Ellipse>
-        <Border Grid.Column="1" CornerRadius="5" Background="LightSeaGreen" Padding="5" Margin="5">
+        <Border Grid.Column="1" CornerRadius="5" 
+                Background="#2E7D32" 
+                MinWidth="100"
+                Padding="5" Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.4*"/>
@@ -36,7 +40,9 @@
                 <TextBlock Text="{Binding User}" FontSize="10" Margin="0,0,0,1" Grid.Column="0" Grid.Row="0"/>
                 <TextBlock Text="{Binding Content}" TextWrapping="Wrap" MaxWidth="200" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" FontSize="14" HorizontalAlignment="left" VerticalAlignment="center"/>
                 <TextBlock Text="{Binding TimeStamp}" FontSize="9" Grid.Column="2" Grid.Row="2"/>
-                <Button Grid.Column="2" Grid.Row="0"/>
+                <Button Grid.Column="2" Grid.Row="0"
+                        Content="{material:PackIcon Kind=DotsVertical}"
+                        Style="{StaticResource IconButton}"/>
             </Grid>
         </Border>
     </Grid>
